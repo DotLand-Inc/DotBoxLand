@@ -1,6 +1,5 @@
 using DotBoxLand.Storage.Api.Models;
 using DotBoxLand.Storage.Api.Services;
-using DotBoxLand.Storage.Api.GraphQL;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,12 +18,6 @@ builder.Services.AddSingleton<MongoDbService>();
 builder.Services.AddSingleton<S3Service>();
 
 builder.Services.AddControllers();
-
-// Add GraphQL
-builder.Services
-    .AddGraphQLServer()
-    .AddQueryType<Query>()
-    .AddMutationType<Mutation>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -57,8 +50,5 @@ app.UseCors();
 app.UseAuthorization();
 
 app.MapControllers();
-
-// Map GraphQL endpoint
-app.MapGraphQL("/graphql");
 
 app.Run();
